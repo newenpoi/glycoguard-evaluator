@@ -18,7 +18,7 @@ public class EvaluationServiceImpl implements EvaluationService {
 	@Override
 	public RiskLevel evaluate(Patient p, List<Note> notes) {
 		// Récupérer l'âge du patient.
-		int dob = CustomDateUtils.calculateAge(p.getDob());
+		int age = CustomDateUtils.calculateAge(p.getDob());
 		Gender sex = p.getGender();
 		
 		// Le nombre de terminologies trouvées pour ce patient.
@@ -26,20 +26,37 @@ public class EvaluationServiceImpl implements EvaluationService {
 		
 		// Pour chaque notes vérifier la présence des termes déclencheurs (terminologie).
 		for (Note note : notes) {
-			// Pour chaque terminologie.
+			// Parcours les terminologies.
 			for (Terminology terminology : Terminology.values()) {
-				// Si la note contient une des terminologies.
-				if (note.getNote().contains(terminology.getTerm())) matches++;
+				// Si la note contient cette terminologie.
+				if (note.getNote().toLowerCase().contains(terminology.getTerm().toLowerCase())) matches++;
 			}
 		}
 		
-		// Si aucun match on peut directement renvoyer le rapport d'évaluation.
-		if (matches == 0) return RiskLevel.NONE;
+		RiskLevel riskLevel = RiskLevel.NONE;
 		
-		// À partir de là on s'occupe des critères de l'âge et du sexe.
+		// Si le patient a entre deux et cinq terminologies et a plus de trente ans.
+		if (matches >= 2 && matches < 5 && age >= 30) riskLevel = RiskLevel.BORDERLINE;
 		
+		// Si le patient est un homme en dessous de trente ans avec au moins trois terminologies.
+		if (sex == Gender.MASCULINE && (age < 30 && matches >= 3)) riskLevel = RiskLevel.INDANGER;
 		
-		return null;
+		// Si le patient est une femme en dessous de trente ans avec au moins quatre terminologies.
+		if (sex == Gender.FEMININE && (age < 30 && matches >= 4)) riskLevel = RiskLevel.INDANGER;
+		
+		// Au dessus de trente ans et au moins six terminologies.
+		if (age >= 30 && matches >= 6) riskLevel = RiskLevel.INDANGER;
+		
+		// Si le patient est un homme en dessous de trente ans avec au moins cinq terminologies.
+		if (sex == Gender.MASCULINE && (age < 30 && matches >= 5)) riskLevel = RiskLevel.EARLYONSET;
+		
+		// Si le patient est une femme en dessous de trente ans avec au moins sept terminologies.
+		if (sex == Gender.FEMININE && (age < 30 && matches >= 7)) riskLevel = RiskLevel.EARLYONSET;
+		
+		// Si le patient est une femme en dessous de trente ans avec au moins sept terminologies.
+		if (age >= 30 && matches >= 8) riskLevel = RiskLevel.EARLYONSET;
+		
+		return (riskLevel);
 	}
 
 }

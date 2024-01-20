@@ -20,7 +20,8 @@ public class SecurityConfig {
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers(new AntPathRequestMatcher("/"),
 								new AntPathRequestMatcher("/notes/**"),
-								new AntPathRequestMatcher("/patients/**"))
+								new AntPathRequestMatcher("/patients/**"),
+								new AntPathRequestMatcher("/evaluator/**"))
 						.permitAll().requestMatchers(new AntPathRequestMatcher("/admin/**")).authenticated())
 				.build();
 	}

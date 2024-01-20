@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 public class CustomDateUtils {
 	
-	private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
 	/*
 	 * Calcul l'âge d'une entité en fonction de sa date de naissance récupérée sous forme de chaîne.
