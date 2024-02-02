@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.openclassrooms.medilabo.glycoguardeval.beans.Note;
 
-@FeignClient(name = "microservice-notes", url = "localhost:9112")
+@FeignClient(name = "microservice-notes", url = "glycoguard-notes:9112")
 public interface NoteProxy {
 	
 	@GetMapping("/notes/{idPatient}")

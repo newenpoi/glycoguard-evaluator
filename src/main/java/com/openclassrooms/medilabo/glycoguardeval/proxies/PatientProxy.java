@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.openclassrooms.medilabo.glycoguardeval.beans.Patient;
 
-@FeignClient(name = "microservice-patients", url = "localhost:9111")
+@FeignClient(name = "microservice-patients", url = "glycoguard-patients:9111")
 public interface PatientProxy {
     
 	@GetMapping("/patients/{idPatient}")
