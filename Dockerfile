@@ -1,6 +1,5 @@
 # Utilisation de l'image officielle Maven.
 FROM maven:3.8.4-openjdk-17 as build
-LABEL name="medilabo solutions"
 WORKDIR /app
 
 # Copie du projet vers le container.
