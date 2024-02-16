@@ -15,6 +15,12 @@ import com.openclassrooms.medilabo.glycoguardeval.utils.CustomDateUtils;
 @Service
 public class EvaluationServiceImpl implements EvaluationService {
 
+	/**
+	 * Bon ok ça a pas l'air super ergonomique mais le résultat est là.
+	 * On pourrait réfléchir à une approche basé sur une échelle et une seconde méthode qui
+	 * calculerait le risque.
+	 * Accessoiremment utiliser un switch si possible...
+	 */
 	@Override
 	public RiskLevel evaluate(Patient p, List<Note> notes) {
 		// Récupérer l'âge du patient.

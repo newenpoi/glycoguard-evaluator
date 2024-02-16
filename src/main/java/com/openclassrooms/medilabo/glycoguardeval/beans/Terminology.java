@@ -3,6 +3,12 @@ package com.openclassrooms.medilabo.glycoguardeval.beans;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * Ce qu'on aurait pu faire différemment :
+ * Créer une table pour les terminologies et non une énumération.
+ * @author newenpoi
+ *
+ */
 @AllArgsConstructor
 @Getter
 public enum Terminology {

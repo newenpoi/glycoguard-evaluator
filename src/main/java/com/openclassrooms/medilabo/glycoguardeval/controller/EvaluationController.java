@@ -25,6 +25,11 @@ public class EvaluationController {
 	
 	private final EvaluationService service;
 	
+	/**
+	 * Évalue et renvoie un niveau de risque au client (RiskLevel) pour son risque de diabète.
+	 * @param idPatient
+	 * @return
+	 */
 	@GetMapping("/evaluator/{idPatient}")
 	public ResponseEntity<RiskLevel> evaluate(@PathVariable Long idPatient) {
 		// On a besoin de la date de naissance du patient (interroger micro service patients).
